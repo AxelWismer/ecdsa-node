@@ -9,6 +9,22 @@ The application allows you to sign monetary transactions using the user's privat
 
 https://user-images.githubusercontent.com/49920097/206914537-8491be30-90f3-4940-bc67-e5427cbdaadf.mp4
 
+### Cryptography module
+For this project, a typescript cryptography module was created with the following functions:
+```typescript
+function hashMessage(message: string) : Uint8Array
+
+async function signMessage(message: string, privateKey: Uint8Array) : Promise<[string, number]>
+
+function getAddress(publicKey: Uint8Array): string
+
+function recoverKey(message: string, signature: string, recoveryBit: number): Uint8Array
+
+function authenticate(message: string, signature: string, recoveryBit: number): [boolean, string]
+```
+
+The objective of the module is to provide the UI and the server with the same cryptographic functions so that they can communicate securely.
+
 ## Get started
 
 ### Video instructions
