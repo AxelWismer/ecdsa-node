@@ -19,7 +19,8 @@ function hashMessage(message) {
 exports.hashMessage = hashMessage;
 function signMessage(message, privateKey) {
     return __awaiter(this, void 0, void 0, function* () {
-        return (0, secp256k1_1.sign)(hashMessage(message), privateKey, { recovered: true });
+        const [signature, recoveryBit] = yield (0, secp256k1_1.sign)(hashMessage(message), privateKey, { recovered: true });
+        return [(0, utils_1.toHex)(signature), recoveryBit];
     });
 }
 exports.signMessage = signMessage;
@@ -28,15 +29,18 @@ function getAddress(publicKey) {
 }
 exports.getAddress = getAddress;
 function recoverKey(message, signature, recoveryBit) {
-    return __awaiter(this, void 0, void 0, function* () {
-        return (0, secp256k1_1.recoverPublicKey)(hashMessage(message), signature, recoveryBit);
-    });
+    return (0, secp256k1_1.recoverPublicKey)(hashMessage(message), signature, recoveryBit);
 }
 exports.recoverKey = recoverKey;
-function authenticate(message, signature, recoveryBit, address) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const publicKey = yield (0, secp256k1_1.recoverPublicKey)(hashMessage(message), signature, recoveryBit);
-        return address === getAddress(publicKey);
-    });
+function authenticate(message, signature, recoveryBit) {
+    let address = "";
+    let authenticated = true;
+    try {
+        address = getAddress(recoverKey(message, signature, recoveryBit));
+    }
+    catch (error) {
+        authenticated = false;
+    }
+    return [authenticated, address];
 }
 exports.authenticate = authenticate;

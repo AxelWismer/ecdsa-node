@@ -1,9 +1,11 @@
 import { useState } from "react";
 import server from "./server";
+import { signMessage } from "cryptography";
 
-function Transfer({ address, setBalance }) {
+function Transfer({ setBalance, privateKey }) {
   const [sendAmount, setSendAmount] = useState("");
   const [recipient, setRecipient] = useState("");
+
 
   const setValue = (setter) => (evt) => setter(evt.target.value);
 
@@ -11,12 +13,18 @@ function Transfer({ address, setBalance }) {
     evt.preventDefault();
 
     try {
+      const message = {
+        amount: parseInt(sendAmount),
+        recipient,
+      }
+      const [signature, recoveryBit] = await signMessage(JSON.stringify(message), privateKey);
+      console.log("transfer ~ [signature, recoveryBit]", [signature, recoveryBit]);
       const {
         data: { balance },
       } = await server.post(`send`, {
-        sender: address,
-        amount: parseInt(sendAmount),
-        recipient,
+        message,
+        signature,
+        recoveryBit
       });
       setBalance(balance);
     } catch (ex) {

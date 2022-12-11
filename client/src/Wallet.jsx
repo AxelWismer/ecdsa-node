@@ -1,6 +1,7 @@
 import server from "./server";
 import * as secp from "ethereum-cryptography/secp256k1";
 import { getAddress } from "cryptography";
+
 function checkPrivateKey(privateKey) {
   return privateKey.length == 64;
 }
