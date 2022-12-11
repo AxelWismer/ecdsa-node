@@ -4,16 +4,18 @@ This project is an example of using a client and server to facilitate transfers 
 
 However, something that we would like to incorporate is Public Key Cryptography. By using Elliptic Curve Digital Signatures we can make it, so the server only allows transfers that have been signed for by the person who owns the associated address.
 
+## Results
+The application allows you to sign monetary transactions using the user's private key. Then, the server verifies that the signature is correct and extracts the address of the sender to modify the account balances.
+
+https://user-images.githubusercontent.com/49920097/206914537-8491be30-90f3-4940-bc67-e5427cbdaadf.mp4
+
+## Get started
+
 ### Video instructions
 For an overview of this project as well as getting started instructions, check out the following video:
 
 https://www.loom.com/share/0d3c74890b8e44a5918c4cacb3f646c4
 
-## Results
-The application allows you to sign monetary transactions using the user's private key. Then, the server verifies that the signature is correct and extracts the address of the sender to modify the account balances.
-
-
-## Get started
 ### Client
 
 The client folder contains a [react app](https://reactjs.org/) using [vite](https://vitejs.dev/). To get started, follow these steps:
