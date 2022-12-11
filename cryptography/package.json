@@ -1,0 +1,43 @@
+{
+  "_location": "/cryptography",
+  "_inBundle": false,
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "cryptography",
+    "name": "cryptography",
+    "escapedName": "cryptography",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_spec": "cryptography",
+  "bundleDependencies": false,
+
+  "main": "./index.js",
+  "name": "cryptography",
+  "version": "1.0.0",
+  "scripts": {
+    "build": ". scripts/build.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ethereum-cryptography": "^1.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.13",
+    "typescript": "^4.9.4"
+  },
+  "exports": {
+    ".": {
+      "import": "./index.ts",
+      "require": "./index.js"
+    }
+  },
+  "files": [
+    "index.js"
+  ]
+}
